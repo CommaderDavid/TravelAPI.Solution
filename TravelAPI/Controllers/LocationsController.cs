@@ -18,13 +18,13 @@ namespace TravelAPI.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<Location>> Get(string name, string country, string city, string review, int minRating)
+        public ActionResult<IEnumerable<Location>> Get(string user_name, string country, string city, string review, int minRating)
         {
             var query = _db.Locations.AsQueryable();
 
-            if (name != null)
+            if (user_name != null)
             {
-                query = query.Where(entry => entry.Name == name);
+                query = query.Where(entry => entry.User_Name == user_name);
             }
 
             if (country != null)
@@ -48,6 +48,35 @@ namespace TravelAPI.Controllers
             }
 
             return query.ToList();
+        }
+
+        [HttpPost]
+        public void Post([FromBody] Location location)
+        {
+            _db.Locations.Add(location);
+            _db.SaveChanges();
+        }
+
+        [HttpGet("{id}")]
+        public ActionResult<Location> Get(int id)
+        {
+            return _db.Locations.FirstOrDefault(entry => entry.LocationId == id);
+        }
+
+        [HttpPut("{id}")]
+        public void Put(int id, [FromBody] Location location)
+        {
+            location.LocationId = id;
+            _db.Entry(location).State = EntityState.Modified;
+            _db.SaveChanges();
+        }
+
+        [HttpDelete("{id}")]
+        public void Delete(int id)
+        {
+            Location locationToDelete = _db.Locations.FirstOrDefault(entry => entry.LocationId == id);
+            _db.Locations.Remove(locationToDelete);
+            _db.SaveChanges();
         }
     }
 }
