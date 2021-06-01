@@ -2,9 +2,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace TravelAPI.Models
 {
-    public class Location
+    public class Review
     {
-        public int LocationId { get; set; }
+        public int ReviewId { get; set; }
         [Required]
         [StringLength(30)]
         public string User_Name { get; set; }
@@ -15,9 +15,9 @@ namespace TravelAPI.Models
         [StringLength(20)]
         public string City { get; set; }
         [Required]
-        public string Review { get; set; }
+        public string UserReview { get; set; }
         [Required]
-        [Range(0, 10, ErrorMessage = "Age must be between 0 and 10.")]
+        [Range(0, 10, ErrorMessage = "Rating must be between 0 and 10.")]
         public int Rating { get; set; }
     }
 }
