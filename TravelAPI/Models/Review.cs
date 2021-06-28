@@ -7,9 +7,14 @@ namespace TravelAPI.Models
         public int ReviewId { get; set; }
         [Required]
         [StringLength(30)]
-        public string User_Name { get; set; }
+        public string UserName { get; set; }
         [Required]
         [StringLength(20)]
+        public string UserPassword { get; set; }
+        [Required]
+        [StringLength(10)]
+        public string UserRole { get; set; }
+        [Required]
         public string Country { get; set; }
         [Required]
         [StringLength(20)]

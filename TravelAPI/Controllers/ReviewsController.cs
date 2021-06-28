@@ -24,7 +24,7 @@ namespace TravelAPI.Controllers
 
             if (user_name != null)
             {
-                query = query.Where(entry => entry.User_Name == user_name);
+                query = query.Where(entry => entry.UserName == user_name);
             }
 
             if (country != null)
@@ -67,7 +67,7 @@ namespace TravelAPI.Controllers
         public void Put(int id, [FromBody] Review review, string user_name)
         // need all of the review when updating it.
         {
-            if (review.User_Name == user_name)
+            if (review.UserName == user_name)
             {
                 review.ReviewId = id;
                 _db.Entry(review).State = EntityState.Modified;
@@ -80,7 +80,7 @@ namespace TravelAPI.Controllers
         // dont need all of the review to delete it, just the id
         {
             Review reviewToDelete = _db.Reviews.FirstOrDefault(entry => entry.ReviewId == id);
-            if (reviewToDelete.User_Name == user_name)
+            if (reviewToDelete.UserName == user_name)
             {
                 _db.Reviews.Remove(reviewToDelete);
                 _db.SaveChanges();
