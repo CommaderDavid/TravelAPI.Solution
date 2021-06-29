@@ -10,11 +10,6 @@ namespace TravelAPI.Models
         public string UserName { get; set; }
         [Required]
         [StringLength(20)]
-        public string UserPassword { get; set; }
-        [Required]
-        [StringLength(10)]
-        public string UserRole { get; set; }
-        [Required]
         public string Country { get; set; }
         [Required]
         [StringLength(20)]
