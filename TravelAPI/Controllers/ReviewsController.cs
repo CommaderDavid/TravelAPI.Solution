@@ -64,10 +64,12 @@ namespace TravelAPI.Controllers
         }
 
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] Review review, string user_name)
+        public void Put(int id, [FromBody] Review review)
         // need all of the review when updating it.
         {
-            if (review.UserName == user_name)
+            Review reviewToEdit = _db.Reviews.FirstOrDefault(entry => entry.ReviewId == id);
+            //Grabs the Review in the database by Id
+            if (review.UserName == reviewToEdit.UserName)
             {
                 review.ReviewId = id;
                 _db.Entry(review).State = EntityState.Modified;
@@ -76,11 +78,11 @@ namespace TravelAPI.Controllers
         }
 
         [HttpDelete("{id}")]
-        public void Delete(int id, string user_name)
+        public void Delete(int id, [FromBody] Review review)
         // dont need all of the review to delete it, just the id
         {
             Review reviewToDelete = _db.Reviews.FirstOrDefault(entry => entry.ReviewId == id);
-            if (reviewToDelete.UserName == user_name)
+            if (reviewToDelete.UserName == review.UserName)
             {
                 _db.Reviews.Remove(reviewToDelete);
                 _db.SaveChanges();
