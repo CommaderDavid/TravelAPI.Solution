@@ -67,14 +67,13 @@ namespace TravelAPI.Controllers
         public void Put(int id, [FromBody] Review review)
         // need all of the review when updating it.
         {
-            Review reviewToEdit = _db.Reviews.FirstOrDefault(entry => entry.ReviewId == id);
             review.ReviewId = id;
             _db.Entry(review).State = EntityState.Modified;
             _db.SaveChanges();
         }
 
         [HttpDelete("{id}")]
-        public void Delete(int id, [FromBody] Review review)
+        public void Delete(int id)
         // dont need all of the review to delete it, just the id
         {
             Review reviewToDelete = _db.Reviews.FirstOrDefault(entry => entry.ReviewId == id);
