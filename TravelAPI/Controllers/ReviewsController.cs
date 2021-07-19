@@ -1,3 +1,4 @@
+using System;
 using TravelAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -51,9 +52,9 @@ namespace TravelAPI.Controllers
         }
 
         [HttpPost]
-        public void Post([FromBody] Review Review)
+        public void Post([FromBody] Review review)
         {
-            _db.Reviews.Add(Review);
+            _db.Reviews.Add(review);
             _db.SaveChanges();
         }
 
